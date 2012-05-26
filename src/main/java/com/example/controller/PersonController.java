@@ -19,7 +19,7 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @RequestMapping("/")
+    @RequestMapping("/people")
     public String listPeople(Map<String, Object> map) {
 
         map.put("person", new Person());
