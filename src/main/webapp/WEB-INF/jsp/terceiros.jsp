@@ -12,7 +12,7 @@
 <body>
 	<div id="topBar">
 		<a href="<c:url value="/"/>"><img src="<c:url value="/assets/images/home.png"/>" /></a> <a
-			href="<c:url value="/terceiros"/>"><img src="<c:url value="/assets/images/search_1.png"/>" /></a> <a
+			href="<c:url value="/mvc/terceiros"/>"><img src="<c:url value="/assets/images/search_1.png"/>" /></a> <a
 			href="<c:url value="/"/>"><img src="<c:url value="/assets/images/help.png"/>" /></a> <a href="<c:url value="/"/>"><img
 			src="<c:url value="/assets/images/logo_pequeno.png"/>" class="logo" /></a>
 	</div>

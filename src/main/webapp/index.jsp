@@ -12,7 +12,7 @@
 
 	<p id="SeusCads">Seus cadastros agora geolocalizados!</p>
 
-	<a href="<c:url value="/terceiros"/>"><img alt="Clique_aqui" class="cliqueAqui"
+	<a href="<c:url value="/mvc/terceiros"/>"><img alt="Clique_aqui" class="cliqueAqui"
 		onmouseout="this.src='<c:url value="/assets/images/clique_aqui.png"/>'"
 		onmouseover="this.src='<c:url value="/assets/images/clique_aqui_out.png"/>'"
 		src="<c:url value="/assets/images/clique_aqui.png"/>" /></a>
