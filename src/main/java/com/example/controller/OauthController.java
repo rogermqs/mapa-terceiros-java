@@ -41,7 +41,7 @@ public class OauthController {
 		RequestInformation requestInformation = new RequestInformation();
 		
 		requestInformation.setCode(requestToken);
-		requestInformation.setRedirect_uri("http://localhost:8080/mapa-terceiros-java/mvc/oauth/vpsa/callback");
+		requestInformation.setRedirect_uri("http://mapa-terceiros-java.herokuapp.com/mvc/oauth/vpsa/callback");
 		requestInformation.setClient_secret("00dfecbb71109cabf885cb155c997e1fc0bb758d053b783d0b2f1479309e6691");
 		requestInformation.setClient_id("https://vpsa-oauth-server.herokuapp.com/clients/4fc017ef9343dd0001000011");
 		requestInformation.setGrant_type("authorization_code");
@@ -56,7 +56,7 @@ public class OauthController {
 		urlAuth += "response_type=code&";
 		urlAuth += "scope=all&";
 		urlAuth += "client_id=https://vpsa-oauth-server.herokuapp.com/clients/4fc017ef9343dd0001000011&";
-		urlAuth += "redirect_uri=http://localhost:8080/mapa-terceiros-java/mvc/oauth/vpsa/callback";
+		urlAuth += "redirect_uri=http://mapa-terceiros-java.herokuapp.com/mvc/oauth/vpsa/callback";
 			    		
 		return "redirect:" + urlAuth;
 	}
