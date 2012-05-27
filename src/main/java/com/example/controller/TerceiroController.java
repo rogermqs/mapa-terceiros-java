@@ -1,6 +1,7 @@
 package com.example.controller;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,8 @@ public class TerceiroController {
 	
 	private @Autowired HttpServletRequest request;
 	
+	private @Autowired MapsController mapsController;
+	
 	@RequestMapping("/terceiros")
 	public String listarTerceiros(Map<String, Object> map)
 	{
@@ -36,7 +39,8 @@ public class TerceiroController {
 			
 			HttpEntity<String> httpEntity = new HttpEntity<String>(headers);
 			
-			ResponseEntity<ArrayList> exchange = restTemplate.exchange("https://vpsa-oauth-server.herokuapp.com/terceiros.json?token=" + request.getSession().getAttribute("access_token"), HttpMethod.GET, httpEntity, ArrayList.class,  (Object)null);
+			String url = "https://vpsa-oauth-server.herokuapp.com/terceiros.json?token=" + request.getSession().getAttribute("access_token");
+			ResponseEntity<Terceiro[]> exchange = restTemplate.exchange(url, HttpMethod.GET, httpEntity, Terceiro[].class,  (Object)null);
 			
 			map.put("terceiros", exchange.getBody());
 			
@@ -59,9 +63,30 @@ public class TerceiroController {
 			
 			HttpEntity<String> httpEntity = new HttpEntity<String>(headers);
 			
-			ResponseEntity<Terceiro> exchange = restTemplate.exchange("https://vpsa-oauth-server.herokuapp.com/terceiros/" + idTerceiro + ".json?token=" + request.getSession().getAttribute("access_token"), HttpMethod.GET, httpEntity, Terceiro.class,  (Object)null);
+			String url = "https://vpsa-oauth-server.herokuapp.com/terceiros/" + idTerceiro + ".json?token=" + request.getSession().getAttribute("access_token");
 			
-			map.put("terceiro", exchange.getBody());
+			ResponseEntity<Terceiro> exchange = restTemplate.exchange(url, HttpMethod.GET, httpEntity, Terceiro.class,  (Object)null);
+			
+			Terceiro terceiro = exchange.getBody();
+			
+			List resultadoPesquisa = mapsController.search(terceiro.getEndereco().getEnderecoCompleto());
+			
+			if(resultadoPesquisa.size() > 0)
+			{
+				String enderecoFormatado = getEnderecoFormatado(resultadoPesquisa);
+				
+				map.put("endereco_formatado", enderecoFormatado);
+				map.put("latitude", getLatitude(resultadoPesquisa));
+				map.put("longitude", getLongitude(resultadoPesquisa));
+			}
+			else
+			{
+				map.put("latitude", 0);
+				map.put("longitude", 0);
+			}
+			
+			
+			map.put("terceiro", terceiro);
 			
 			return "show";
 		}
@@ -70,5 +95,17 @@ public class TerceiroController {
 			request.getSession().setAttribute("url_before_auth", request.getPathInfo());
 			return "redirect:/mvc/auth/oauth";
 		}
+	}
+
+	private String getLatitude(List pesquisa) {
+		return ((HashMap) ((HashMap)((HashMap)pesquisa.get(0)).get("geometry")).get("location")).get("lat").toString();
+	}
+	
+	private String getLongitude(List pesquisa) {
+		return ((HashMap) ((HashMap)((HashMap)pesquisa.get(0)).get("geometry")).get("location")).get("lng").toString();
+	}
+
+	private String getEnderecoFormatado(List pesquisa) {
+		return (String) ((HashMap)pesquisa.get(0)).get("formatted_address");
 	}
 }

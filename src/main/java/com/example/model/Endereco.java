@@ -51,4 +51,18 @@ public class Endereco {
 	public void setSiglaEstado(String siglaEstado) {
 		this.siglaEstado = siglaEstado;
 	}
+	
+	public String getBlankIfNull(String s)
+	{
+		if(s == null)
+		{
+			s = "";
+		}
+		
+		return s;
+	}
+
+	public String getEnderecoCompleto() {
+		return getBlankIfNull(getLogradouro()) + "," + getBlankIfNull(getBairro()) + "," + getBlankIfNull(getCidade()) + "," + getBlankIfNull(getPais());
+	}
 }

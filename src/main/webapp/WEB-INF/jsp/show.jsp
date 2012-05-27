@@ -18,7 +18,12 @@
 	</div>
 
 	<h1><c:out value="${terceiro.nome}" /></h1>
-	<p><img src="<c:url value="/assets/images/note2.png"/>" class="noteImg"/><c:out value="${terceiro.endereco}" /></p>
+	<p><img src="<c:url value="/assets/images/note2.png"/>" class="noteImg"/><c:out value="${endereco_formatado}" /></p>
 	<p><img src="<c:url value="/assets/images/mail.png"/>" class="mailImg"/><a href="mailto:<c:out value="${terceiro.email}" />"><c:out value="${terceiro.email}" /></a></p>
+	
+	<h1>Mapa</h1>
+	<div id="ImgMapa">
+		<img src="http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=${latitude}%2C${longitude}" %>
+	</div>
 </body>
 </html>

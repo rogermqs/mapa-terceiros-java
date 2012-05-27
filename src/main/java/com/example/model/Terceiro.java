@@ -29,6 +29,10 @@ public class Terceiro {
 	}
 
 	public Endereco getEndereco() {
+		if(endereco == null)
+		{
+			endereco = new Endereco();
+		}
 		return endereco;
 	}
 
