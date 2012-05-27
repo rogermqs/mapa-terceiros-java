@@ -18,7 +18,8 @@ import com.example.model.RequestInformation;
 @Controller
 public class OauthController {
 
-	private static final String URL_CALLBACK = "http://localhost:8080/mapa-terceiros-java/mvc/oauth/vpsa/callback";
+//	private static final String URL_CALLBACK = "http://localhost:8080/mapa-terceiros-java/mvc/oauth/vpsa/callback";
+	private static final String URL_CALLBACK = "http://mapa-terceiros-java.herokuapp.com/mvc/oauth/vpsa/callback";
 
 	@Autowired
 	private RestTemplate restTemplate;
